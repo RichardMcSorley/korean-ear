@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render HomePage correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItem": "center",
+      "background": "grey",
+      "backgroundSize": "cover",
+      "display": "flex",
+      "height": "100vh",
+      "justifyContent": "center",
+      "width": "100vw",
+    }
+  }
+>
+  <div>
+    <h1>
+      Tobacco
+    </h1>
+    <p>
+      Tagline
+    </p>
+    <Link
+      replace={false}
+      to="/products"
+    >
+      Start
+    </Link>
+  </div>
+</div>
+`;

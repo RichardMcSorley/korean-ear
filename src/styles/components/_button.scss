@@ -1,0 +1,47 @@
+.button {
+  background-color: $blue;
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+  border: none;
+  padding: $s-size;
+  font-weight: 300;
+  font-size: $font-size-large;
+}
+
+.button--link{
+  background: none;
+}
+
+.button--secondary {
+  background: #888888;
+}
+.button--product{
+  div{
+    span{
+      text-transform: none!important;
+      font-weight: 400!important;
+      font-size: 21px !important;
+    }
+  }
+}
+.button--skinny{
+  div{
+    span{
+      padding: 0!important;
+
+    }
+  }
+
+}
+.button--skinny-outline{
+  div{
+    span{
+      padding: 0!important;
+      margin: 0!important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  }
+}
