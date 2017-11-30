@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import cartReducer from "../reducers/cart";
-import blankReducer from '../reducers/blank';
+import trainReducer from '../reducers/train';
+import selectionReducer from '../reducers/selection'
 import thunk from "redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -8,7 +8,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default () => {
   const store = createStore(
     combineReducers({
-      blank: blankReducer
+      train: trainReducer,
+      selection: selectionReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

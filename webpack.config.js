@@ -73,6 +73,7 @@ module.exports = env => {
         //DO NOT COPY FONTS THIS WAY! We are loading them above :)
         //IMAGES
          { from: 'src/assets/images', to: 'assets/images' },
+         { from: 'src/assets/audio', to: 'assets/audio' },
         //index.html
          { from: 'src/index.html', to: 'index.html' },
         //OTHER
