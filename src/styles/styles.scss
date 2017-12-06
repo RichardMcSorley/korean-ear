@@ -12,3 +12,68 @@
 @import '/components/visability';
 @import '/components/list';
 @import '/components/loader';
+
+@-webkit-keyframes scaleDown {
+	to { opacity: 0; -webkit-transform: scale(.8); }
+}
+@-moz-keyframes scaleDown {
+	to { opacity: 0; -moz-transform: scale(.8); }
+}
+@keyframes scaleDown {
+	to { opacity: 0; transform: scale(.8); }
+}
+
+@-webkit-keyframes scaleUp {
+	from { opacity: 0; -webkit-transform: scale(.8); }
+}
+@-moz-keyframes scaleUp {
+	from { opacity: 0; -moz-transform: scale(.8); }
+}
+@keyframes scaleUp {
+	from { opacity: 0; transform: scale(.8); }
+}
+
+.pageSlider-enter {
+	-webkit-animation: scaleDown .2s ease both;
+-moz-animation: scaleDown .2s ease both;
+animation: scaleDown .2s ease both;
+}
+
+.pageSlider-enter.pageSlider-enter-active {
+	-webkit-animation: scaleUp .2s ease both;
+-moz-animation: scaleUp .2s ease both;
+animation: scaleUp .2s ease both;
+}
+
+.my-appear{
+
+}
+.my-active-appear{
+
+}
+.my-enter{
+	-webkit-animation: scaleUp .2s ease both;
+-moz-animation: scaleUp .2s ease both;
+animation: scaleUp .2s ease both;
+}
+.my-active-enter{
+
+}
+.my-exit{
+
+}
+.my-active-exit{
+
+}
+
+// .pageSlider-exit {
+// 	-webkit-animation: scaleDown .2s ease both;
+// -moz-animation: scaleDown .2s ease both;
+// animation: scaleDown .2s ease both;
+// }
+
+// .pageSlider-exit.pageSlider-exit-active {
+// 	-webkit-animation: scaleDown .2s ease both;
+// -moz-animation: scaleDown .2s ease both;
+// animation: scaleDown .2s ease both;
+// }

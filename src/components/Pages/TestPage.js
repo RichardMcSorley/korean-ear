@@ -1,128 +1,232 @@
 import React, {Component} from "react";
 import FlatButton from 'material-ui/FlatButton'
+import Paper from 'material-ui/Paper'
 import Header from '../Header'
 import {connect} from 'react-redux'
 import PlayAudio from '../PlayAudio'
+import Container from '../Container'
+import TestButton from '../TestButton'
+import { skipCard, wrongAnswer, correctAnswer } from '../../actions/train';
+import moment from 'moment'
+import _ from 'underscore'
+const nextSession = JSON.parse(localStorage.nextSession || null);
+const reviewed = JSON.parse(localStorage.reviewed || 0);
+const lastSessionQ = JSON.parse(localStorage.lastSessionQ || null);
 
 const styles={
-          button: {
-            maxWidth: '30%',
-            margin: 5
-          },
-          contentContainer: {
-            display: 'flex',
-             height: '100%',
-              flexWrap: 'wrap'
-              },
-              text: {
-                color: 'white'
-              }
+  button: {
+    margin: 10,
+
+  },
+  text: {
+    color: 'white'
+  },
 }
 export class PracticePage extends Component{
 constructor(props){
   super(props)
-  const syllables = {...this.props.syllables}
   this.state = {
-    questions: this.buildLargerArray(this.props.syllables, 20),
-    index: 0,
-    correct: 0,
-    finished: false
+    nextSession: nextSession,
+    reviewed: reviewed,
+    lastSessionQ: lastSessionQ || {}
   }
-
-}
-buildLargerArray = (array, length) =>{
-  let randomArray = this.shuffleArray(array);
-  for (let i = 0; i < length; i++ ){
-    if(randomArray[i] && array.length < length){
-      array.push(randomArray[i])
-    }
-  }
-  return this.shuffleArray(array);
-}
-shuffleArray = (array) =>{
-    for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array
 }
 
-handleSelectAnswer = (userSelection)=>{
-  if(this.state.index < this.state.questions.length){
-
-    if(userSelection === this.state.questions[this.state.index].answer){
+handleSelectAnswer = (e,userSelection)=>{
+  e.persist();
+    if(userSelection === this.props.currentCard.answer){
+      this.props.currentCard.correct = true;
       console.log('correct');
-      this.setState((prev)=>({correct: prev.correct + 1, index: prev.index + 1}))
-      //correct
+      this.setState((prev)=>{
+
+        let { answer, question, ...rest } = this.props.currentCard
+        prev.lastSessionQ[question] = { ...rest, answer }
+        if(!prev.lastSessionQ[question].value){
+          prev.lastSessionQ[question].value = { correct: 1, incorrect: 0 };
+        }else{
+          console.log('value exists',);
+          prev.lastSessionQ[question].value = { correct: prev.lastSessionQ[question].value.correct + 1, incorrect: prev.lastSessionQ[question].value.incorrect };
+        }
+        let update = {reviewed: prev.reviewed + 1, lastSessionQ: {...prev.lastSessionQ}}
+        return this.saveToLS(update)
+      })
+      setTimeout(()=>{
+        this.props.correctAnswer();
+      }, 1000)
     }else{
+      this.props.currentCard.correct = false;
+      this.setState((prev)=>{
+        let { answer, question, ...rest } = this.props.currentCard
+        prev.lastSessionQ[question] = { ...rest, answer }
+        if(!prev.lastSessionQ[question].value){
+          prev.lastSessionQ[question].value = { correct: 0, incorrect: 1 };
+        }else{
+          console.log('value exists',);
+          prev.lastSessionQ[question].value = { correct: prev.lastSessionQ[question].value.correct , incorrect: prev.lastSessionQ[question].value.incorrect + 1 };
+        }
+        let update = {reviewed: prev.reviewed + 1, lastSessionQ: {...prev.lastSessionQ}}
+        return this.saveToLS(update)
+      })
       console.log('incorrect');
-      this.setState((prev)=>({index: prev.index + 1}))
-      //incorrect
+      setTimeout(()=>{
+        this.props.wrongAnswer();
+      }, 1000)
     }
-  } else {
-    console.log('finished');
-    this.setState((prev)=>({ correct: 0, index: 0, finished: true}))
-  }
-  this.setState((prev)=>({ questions: prev.questions}))
+}
+
+renderItems = ()=>{
+  return this.props.options.map((item)=>(
+<Paper
+style={styles.button}
+  zDepth={3}
+key={item}
+  >
+  <TestButton
+    onClick={(e)=>this.handleSelectAnswer(e,item)}
+    className="button"
+    backgroundColor='#0094FF'
+    rippleColor={this.renderCorrectColor(item)}
+    hoverColor={this.renderCorrectColor(item)}
+    label={item}
+    fullWidth={true}
+     />
+
+</Paper>
+
+
+  ))
+}
+renderBoard = ()=>{
+  return (
+    <div>
+      {this.renderItems()}
+      <PlayAudio
+        playTimes={this.props.multiplier}
+        folder={this.props.options.join('')}
+        filename={ this.props.currentCard && this.props.currentCard.question + '.mp3'}
+      />
+      {this.handleShouldEnd()}
+    </div>
+
+  )
+}
+handleBackButton =()=>{
+history.back()
+}
+saveToLS = (object)=>{
+  Object.keys(object)
+  .forEach( (key) => {
+    localStorage[key] =  JSON.stringify(object[key]);
+  });
+  return object
 }
 renderCorrectColor= (userSelection)=>{
-  if (this.state.questions[this.state.index] && userSelection === this.state.questions[this.state.index].answer){
+  if (this.props.currentCard.answer === userSelection){
     return "green"
   }
   else return "red"
 }
-  render(){
-    const { selection, multiplier } = this.props;
-    console.log('multiplier', this.props.multiplier);
-    return (
-        <Header>
-          {this.state.finished ? (
-            <div style={styles.text}>You did it</div>
-          ) : (
-            <div style={styles.contentContainer}>
-              { selection.map((item)=>(
+handleEndofCards = () =>{
+    //save Timestamp 24 hours from now
+    let update = {nextSession: moment().endOf('day').format()};
+    this.setState((prev)=>(this.saveToLS(update)))
+}
+handleShouldEnd = () =>{
+  if(Object.keys(this.state.lastSessionQ).length > 14){
+    // set timestamp for 15 minutes
+    let update = {nextSession: moment().add(15, 'minutes').format()}
+    this.setState((prev)=>(this.saveToLS(update)))
+  }
+}
+renderNormally=()=>{
 
-                <FlatButton
-                  key={item}
-                  onClick={()=>this.handleSelectAnswer(item)}
-                  style={styles.button}
-                  backgroundColor='#0094FF'
-                  hoverColor={this.renderCorrectColor(item)}
-                  rippleColor={this.renderCorrectColor(item)}
-                  label={item}
-                  fullWidth={true}
-                   />
-              ))}
-              <PlayAudio
-                playTimes={multiplier}
-                folder={selection.join('')}
-                filename={this.state.questions[this.state.index].displayText + '.mp3'}
-              />
-              <p style={styles.text}>correct: {this.state.correct}</p>
+      return (
+        <div>
+          {this.props.currentCard === undefined ? (
+            <div>
+              <Paper
+                zDepth={3}>
+                <FlatButton className="button" label="Continue Studying" onClick={this.handleContinueStudying} backgroundColor='#0094FF' />
+              </Paper>
+            {
+              this.handleEndofCards()
+            }
             </div>
-          ) }
+          ) : this.renderBoard()
+          }
+        </div>
 
+      );
+}
+handleContinueStudying = ()=>{
+  let update = { nextSession: null, reviewed: 0, lastSessionQ: {}}
+  this.props.skipCard();
+  this.setState((prev)=>(this.saveToLS(update)))
+}
+renderEnd=()=>{
 
-        </Header>
-    );
+      return (
+        <div>
+          <div>{Object.keys(this.state.lastSessionQ).length} Reviewed</div>
+          <div>{this.props.train.bucketA.length} To Review</div>
+          <div>
+            You should take a break, come back {moment(this.state.nextSession).startOf('minute').fromNow()}
+            <Paper
+              zDepth={3}>
+              <FlatButton className="button" label="Continue Studying" onClick={this.handleContinueStudying} backgroundColor='#0094FF' />
+            </Paper>
+          </div>
+          <div>
+            {Object.keys(this.state.lastSessionQ).map((key)=>(
+              <p>{key} - {this.state.lastSessionQ[key].answer} - Correct: {this.state.lastSessionQ[key].value.correct} Incorrect: {this.state.lastSessionQ[key].value.incorrect}</p>
+            ))}
+          </div>
+        </div>
+      );
+}
+render(){
+  // if(Timestamp === null || timestamp in past){
+  // displayNormally
+  // }else{
+  // displayPleaseWait with timestamp of how long to wait plus option to continue
+  // }
+  //
+
+  return (
+    <Header onBackButtonClick={this.handleBackButton} title="Test">
+      <Container>
+        {
+          moment(this.state.nextSession).isAfter() ? this.renderEnd() : this.renderNormally()
+        }
+      </Container>
+    </Header>
+  )
+
   }
 }
 
 const mapStateToProps = (state) =>{
-  //filter the
-   const filteredTrain = state.train.filter((item)=>{
-     if(item.title === state.selection.syllabeSelection){
-       return true
-     }
+
+   let allQuestions = [];
+   state.train.sets.forEach((set)=>{
+     allQuestions = allQuestions.concat(set.syllables);
    })
+   let options = [];
+   if(state.train.currentCard){
+     options = state.train.currentCard.options.split(' ')
+   }
   return {
-    // We need only one set of syllables here
-    syllables: filteredTrain[0].syllables,
-    selection: state.selection.syllabeSelection.split(' '),
-    multiplier: state.selection.multiplier
+    train: state.train,
+    currentCard: state.train.currentCard,
+    options: options
   }
 }
+const mapDispatchToProps = ((dispatch)=>{
+  return {
+    skipCard: ()=>dispatch(skipCard()),
+    wrongAnswer: ()=>dispatch(wrongAnswer()),
+    correctAnswer: ()=>dispatch(correctAnswer())
+  }
+})
 
-export default connect(mapStateToProps)(PracticePage);
+export default connect(mapStateToProps,mapDispatchToProps)(PracticePage);

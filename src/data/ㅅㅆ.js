@@ -2,44 +2,44 @@ export default {
   title: "ㅅ ㅆ",
   syllables: [
     {
-      displayText: '삼',
-
+      question: '삼',
+options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
-      displayText: '쌈',
-
+      question: '쌈',
+options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }, {
-      displayText: '살',
-
+      question: '살',
+options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
-      displayText: '쌀',
-
+      question: '쌀',
+options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }, {
-      displayText: '스',
-
+      question: '스',
+options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
-      displayText: '쓰',
-
+      question: '쓰',
+options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }, {
-      displayText: '서',
-
+      question: '서',
+options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
-      displayText: '써',
-
+      question: '써',
+options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }, {
-      displayText: '시',
-
+      question: '시',
+options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
-      displayText: '씨',
-
+      question: '씨',
+options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }
   ]

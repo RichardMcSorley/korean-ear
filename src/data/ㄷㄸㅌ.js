@@ -2,63 +2,63 @@ export default {
   title: "ㄷ ㄸ ㅌ",
   syllables: [
     {
-      displayText: '도',
-
+      question: '도',
+      options: "ㄷ ㄸ ㅌ",
       answer: 'ㄷ'
     },
     {
-      displayText: '또',
-
+      question: '또',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄸ'
     },
     {
-      displayText: '토',
-
+      question: '토',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㅌ'
     },
     {
-      displayText: '달',
-
+      question: '달',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄷ'
     },
     {
-      displayText: '딸',
-
+      question: '딸',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄸ'
     },
     {
-      displayText: '탈',
-
+      question: '탈',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㅌ'
     },
     {
-      displayText: '대',
-
+      question: '대',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄷ'
     },
     {
-      displayText: '때',
-
+      question: '때',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄸ'
     },
     {
-      displayText: '태',
-
+      question: '태',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㅌ'
     },
     {
-      displayText: '들',
-
+      question: '들',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄷ'
     },
     {
-      displayText: '뜰',
-
+      question: '뜰',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㄸ'
     },
     {
-      displayText: '틀',
-
+      question: '틀',
+options: "ㄷ ㄸ ㅌ",
       answer: 'ㅌ'
     },
   ]

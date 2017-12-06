@@ -4,23 +4,24 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import BookIcon from 'material-ui/svg-icons/action/book';
+import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
+import HomeIcon from 'material-ui/svg-icons/navigation/menu';
 
 const styles= {
 
-    contentWrapper: {
-          padding: '16px',
-          margin: '16px',
-          paddingTop: '64px'
-        },
+      }
+      const renderBackButton =(props)=>{
+        if(props.onBackButtonClick){
+          return (<IconButton onClick={props.onBackButtonClick}><BackIcon /></IconButton>)
+        }
+        else return (<IconButton ><HomeIcon /></IconButton>)
       }
 export default (props) => (
   <div>
     <AppBar
-      title="Korean Ear"
+      title={props.title}
       zDepth={3}
-      className="page-header"
-      iconElementLeft={<IconButton><BookIcon /></IconButton>}
+      iconElementLeft={renderBackButton(props)}
       iconElementRight={
         <IconMenu
             iconButtonElement={
@@ -32,9 +33,7 @@ export default (props) => (
             <MenuItem primaryText="Help" />
         </IconMenu>}
     />
-    <div style={styles.contentWrapper}>
-      {props.children}
-    </div>
+  {props.children}
 
   </div>
 

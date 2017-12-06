@@ -2,62 +2,62 @@ export default {
   title: "ㅂ ㅃ ㅍ",
   syllables: [
     {
-      displayText: '벼',
-
+      question: '벼',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅂ'
     },
     {
-      displayText: '뼈',
-
+      question: '뼈',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅃ'
     },{
-      displayText: '펴',
-
+      question: '펴',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅍ'
     },
 {
-      displayText: '배',
-
+      question: '배',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅂ'
     },
 {
-      displayText: '빼',
-
+      question: '빼',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅃ'
     },
  {
-      displayText: '패',
-
+      question: '패',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅍ'
     },
   {
-      displayText: '불',
-
+      question: '불',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅂ'
     },
   {
-      displayText: '뿔',
-
+      question: '뿔',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅃ'
     },
     {
-      displayText: '풀',
-
+      question: '풀',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅍ'
     },
    {
-      displayText: '발',
-
+      question: '발',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅂ'
     },
    {
-      displayText: '빨',
-
+      question: '빨',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅃ'
     },
 {
-      displayText: '팔',
-
+      question: '팔',
+options: "ㅂ ㅃ ㅍ",
       answer: 'ㅍ'
     },
   ]

@@ -2,53 +2,53 @@ export default {
   title: "ㄱ ㄲ ㅋ",
   syllables: [
     {
-      displayText: '기',
-
-      answer: 'ㄱ'
+      question: '기',
+      answer: 'ㄱ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '끼',
-
-      answer: 'ㄲ'
+      question: '끼',
+      answer: 'ㄲ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '키',
-
-      answer: 'ㅋ'
+      question: '키',
+      answer: 'ㅋ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '겁',
-
-      answer: 'ㄱ'
+      question: '겁',
+      answer: 'ㄱ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '껍',
-
-      answer: 'ㄲ'
+      question: '껍',
+      answer: 'ㄲ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '컵',
-
-      answer: 'ㅋ'
+      question: '컵',
+      answer: 'ㅋ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '글',
-
-      answer: 'ㄱ'
+      question: '글',
+      answer: 'ㄱ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '끌',
-
-      answer: 'ㄲ'
+      question: '끌',
+      answer: 'ㄲ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '클',
-
-      answer: 'ㅋ'
+      question: '클',
+      answer: 'ㅋ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '고',
-
-      answer: 'ㄱ'
+      question: '고',
+      answer: 'ㄱ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '꼬',
-
-      answer: 'ㄲ'
+      question: '꼬',
+      answer: 'ㄲ',
+      options: "ㄱ ㄲ ㅋ",
     }, {
-      displayText: '코',
-
-      answer: 'ㅋ'
+      question: '코',
+      answer: 'ㅋ',
+      options: "ㄱ ㄲ ㅋ",
     }
   ]
 }

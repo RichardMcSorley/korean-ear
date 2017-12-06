@@ -2,52 +2,52 @@ export default {
   title: "ㅈ ㅉ ㅊ",
   syllables: [
     {
-      displayText: '절',
-
+      question: '절',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅈ'
     }, {
-      displayText: '쩔',
-
+      question: '쩔',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅉ'
     }, {
-      displayText: '철',
-
+      question: '철',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅊ'
     }, {
-      displayText: '짐',
-
+      question: '짐',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅈ'
     }, {
-      displayText: '찜',
-
+      question: '찜',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅉ'
     }, {
-      displayText: '침',
-
+      question: '침',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅊ'
     }, {
-      displayText: '자',
-
+      question: '자',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅈ'
     }, {
-      displayText: '짜',
-
+      question: '짜',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅉ'
     }, {
-      displayText: '차',
-
+      question: '차',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅊ'
     }, {
-      displayText: '죽',
-
+      question: '죽',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅈ'
     }, {
-      displayText: '쭉',
-
+      question: '쭉',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅉ'
     }, {
-      displayText: '축',
-
+      question: '축',
+options: "ㅈ ㅉ ㅊ",
       answer: 'ㅊ'
     }
   ]
