@@ -13,6 +13,9 @@ if (NODE_ENV === "test") {
 } else if (NODE_ENV === "development") {
   require("dotenv").config({ path: ".env.development" });
 }
+else if (NODE_ENV === "production") {
+ require("dotenv").config({ path: ".env.production" });
+}
 
 module.exports = env => {
   const isProduction = env === "production";
@@ -20,7 +23,7 @@ module.exports = env => {
   return {
     entry: ["babel-polyfill", "./src/app.js"],
     output: {
-      path: path.join(__dirname, "/www"),
+      path: path.join(__dirname, "www"),
       filename: "build/bundle.js"
     },
     module: {
@@ -34,7 +37,7 @@ module.exports = env => {
         //FONTS
         {
           test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'file-loader?name=assets/fonts/[name].[ext]'
+          loader: 'file-loader?name=/assets/fonts/[name].[ext]'
         },
         {
           test: /\.s?css$/,
@@ -68,7 +71,6 @@ module.exports = env => {
       CSSExtract,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-
       new CopyWebpackPlugin([
         //DO NOT COPY FONTS THIS WAY! We are loading them above :)
         //IMAGES
@@ -82,7 +84,6 @@ module.exports = env => {
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
       contentBase: path.join(__dirname, "/www"),
-      publicPath: "/",
       historyApiFallback: true,
       hot: true,
       inline: true,

@@ -13,67 +13,117 @@
 @import '/components/list';
 @import '/components/loader';
 
-@-webkit-keyframes scaleDown {
-	to { opacity: 0; -webkit-transform: scale(.8); }
-}
-@-moz-keyframes scaleDown {
-	to { opacity: 0; -moz-transform: scale(.8); }
-}
-@keyframes scaleDown {
-	to { opacity: 0; transform: scale(.8); }
-}
-
-@-webkit-keyframes scaleUp {
-	from { opacity: 0; -webkit-transform: scale(.8); }
-}
-@-moz-keyframes scaleUp {
-	from { opacity: 0; -moz-transform: scale(.8); }
-}
-@keyframes scaleUp {
-	from { opacity: 0; transform: scale(.8); }
-}
-
-.pageSlider-enter {
-	-webkit-animation: scaleDown .2s ease both;
--moz-animation: scaleDown .2s ease both;
-animation: scaleDown .2s ease both;
-}
-
-.pageSlider-enter.pageSlider-enter-active {
-	-webkit-animation: scaleUp .2s ease both;
--moz-animation: scaleUp .2s ease both;
-animation: scaleUp .2s ease both;
-}
-
-.my-appear{
-
-}
-.my-active-appear{
-
-}
-.my-enter{
-	-webkit-animation: scaleUp .2s ease both;
--moz-animation: scaleUp .2s ease both;
-animation: scaleUp .2s ease both;
-}
-.my-active-enter{
-
-}
-.my-exit{
-
-}
-.my-active-exit{
-
-}
-
-// .pageSlider-exit {
-// 	-webkit-animation: scaleDown .2s ease both;
-// -moz-animation: scaleDown .2s ease both;
-// animation: scaleDown .2s ease both;
+// .example-enter {
+//   animation: fadeIn 0.7s ease both;
 // }
-
-// .pageSlider-exit.pageSlider-exit-active {
-// 	-webkit-animation: scaleDown .2s ease both;
-// -moz-animation: scaleDown .2s ease both;
-// animation: scaleDown .2s ease both;
+//
+// .example-enter.example-enter-active {
+// animation: fadeIn 0.7s ease both;
 // }
+//
+// .example-leave {
+// animation: fadeIn 0.7s ease both;
+// //animation: moveToRightFade 0.7s ease both;
+// //position:absolute;
+// }
+//
+// .example-leave.example-leave-active {
+// animation: fadeIn 0.7s ease both;
+// }
+// .example-appear {
+//   animation: fadeIn 0.7s ease both;
+// //animation: moveFromLeftFade 0.7s ease both;
+// }
+//
+// .example-appear.example-appear-active {
+// animation: fadeIn 0.7s ease both;
+// }
+.example-enter {
+    opacity: 0;
+    transform:   translate(-250px,0);
+    transform: translate3d(-250px,0,0);
+}
+.example-enter.example-enter-active {
+	opacity: 1;
+	transition: opacity 1s ease;
+	transform:   translate(0,0);
+	transform: translate3d(0,0,0);
+	transition-property: transform, opacity;
+	transition-duration: 300ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+}
+.example-leave {
+	opacity: 1;
+	transform:   translate(0,0,0);
+	transform: translate3d(0,0,0);
+  transition-property: transform, opacity;
+	transition-duration: 300ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+}
+.example-leave.example-leave-active {
+	opacity: 0;
+	transform:   translate(250px,0);
+	transform: translate3d(250px,0,0);
+}
+
+@keyframes fade {
+  from {
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes moveToLeftFade {
+  from {}
+
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+@keyframes moveFromLeftFade {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes moveToRightFade {
+  from {}
+
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+@keyframes moveFromRightFade {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}

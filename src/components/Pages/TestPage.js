@@ -9,18 +9,22 @@ import TestButton from '../TestButton'
 import { skipCard, wrongAnswer, correctAnswer } from '../../actions/train';
 import moment from 'moment'
 import _ from 'underscore'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 const nextSession = JSON.parse(localStorage.nextSession || null);
 const reviewed = JSON.parse(localStorage.reviewed || 0);
 const lastSessionQ = JSON.parse(localStorage.lastSessionQ || null);
 
 const styles={
   button: {
-    margin: 10,
+    position: 'absolute',
 
   },
   text: {
     color: 'white'
   },
+  buttonContainer: {
+
+  }
 }
 export class PracticePage extends Component{
 constructor(props){
@@ -77,9 +81,10 @@ handleSelectAnswer = (e,userSelection)=>{
 renderItems = ()=>{
   return this.props.options.map((item)=>(
 <Paper
-style={styles.button}
+  style={styles.button}
+  key={item}
   zDepth={3}
-key={item}
+
   >
   <TestButton
     onClick={(e)=>this.handleSelectAnswer(e,item)}
@@ -92,22 +97,31 @@ key={item}
      />
 
 </Paper>
-
-
   ))
 }
 renderBoard = ()=>{
   return (
-    <div>
-      {this.renderItems()}
-      <PlayAudio
-        playTimes={this.props.multiplier}
-        folder={this.props.options.join('')}
-        filename={ this.props.currentCard && this.props.currentCard.question + '.mp3'}
-      />
-      {this.handleShouldEnd()}
-    </div>
+  <div>
+    <ReactCSSTransitionGroup
 
+    transitionName="example"
+    transitionAppear={true}
+    transitionLeave={true}
+    transitionEnter={true}
+    transitionAppearTimeout={700}
+    transitionLeaveTimeout={700}
+    transitionEnterTimeout={700}
+    >
+      {this.renderItems()}
+
+  </ReactCSSTransitionGroup>
+    <PlayAudio
+      playTimes={this.props.multiplier}
+      folder={this.props.options.join('')}
+      filename={ this.props.currentCard && this.props.currentCard.question + '.mp3'}
+    />
+    {this.handleShouldEnd()}
+  </div>
   )
 }
 handleBackButton =()=>{
