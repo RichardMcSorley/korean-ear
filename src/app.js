@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-
+import { HashRouter } from 'react-router-dom';
 import {
   cyan500, cyan700,
   pinkA200,
@@ -49,9 +49,12 @@ const muiTheme = getMuiTheme({
 const store = configureStore();
 
 const App = (
+
   <MuiThemeProvider muiTheme={muiTheme}>
     <Provider store={store}>
-      <AppRouter />
+      <HashRouter>
+        <AppRouter />
+      </HashRouter>
     </Provider>
   </MuiThemeProvider>
 );

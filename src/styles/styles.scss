@@ -12,6 +12,7 @@
 @import '/components/visability';
 @import '/components/list';
 @import '/components/loader';
+@import '/animations/page-transitions';
 
 @-webkit-keyframes scaleDown {
 	to { opacity: 0; -webkit-transform: scale(.8); }
@@ -33,39 +34,64 @@
 	from { opacity: 0; transform: scale(.8); }
 }
 
-.pageSlider-enter {
-	-webkit-animation: scaleDown .2s ease both;
--moz-animation: scaleDown .2s ease both;
-animation: scaleDown .2s ease both;
-}
 
-.pageSlider-enter.pageSlider-enter-active {
-	-webkit-animation: scaleUp .2s ease both;
--moz-animation: scaleUp .2s ease both;
-animation: scaleUp .2s ease both;
-}
-
-.my-appear{
-
-}
-.my-active-appear{
-
-}
-.my-enter{
-	-webkit-animation: scaleUp .2s ease both;
--moz-animation: scaleUp .2s ease both;
-animation: scaleUp .2s ease both;
-}
-.my-active-enter{
-
-}
-.my-exit{
-
-}
-.my-active-exit{
+.fade-appear,
+.fade-enter {
 
 }
 
+.fade-appear-active,
+.fade-enter-active {
+  transition: all .8s both ease;
+	animation: rotateRoomLeftIn .8s both ease;
+}
+
+
+.fade-exit {
+	transform-origin: 100% 50%;
+}
+
+.fade-exit-active {
+	transition: all .8s both ease;
+	animation: rotateRoomLeftOut .8s both ease;
+}
+
+.test-questions-appear,
+.test-questions-enter {
+transform-origin: 0% 50%;
+}
+
+.test-questions-appear-active,
+.test-questions-enter-active {
+	transition: all .8s both ease;
+	animation: rotateRoomLeftIn .8s both ease;
+}
+
+.test-questions-exit {
+	transition: all .8s both ease;
+	animation: rotateRoomLeftOut .8s both ease;
+}
+
+.test-questions-exit-active {
+	transform-origin: 100% 50%;
+}
+.test-bed{
+	position: absolute;
+}
+.page-test{
+	position: absolute;
+	left: 0;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+}
+
+.header{
+	position: fixed;
+}
+.header-wrap{
+	width: 100vw;
+}
 // .pageSlider-exit {
 // 	-webkit-animation: scaleDown .2s ease both;
 // -moz-animation: scaleDown .2s ease both;

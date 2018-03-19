@@ -9,15 +9,17 @@ options: "ㅅ ㅆ",
       question: '쌈',
 options: "ㅅ ㅆ",
       answer: 'ㅆ'
-    }, {
-      question: '살',
-options: "ㅅ ㅆ",
-      answer: 'ㅅ'
-    }, {
-      question: '쌀',
-options: "ㅅ ㅆ",
-      answer: 'ㅆ'
-    }, {
+    },
+//      {
+//       question: '살',
+// options: "ㅅ ㅆ",
+//       answer: 'ㅅ'
+//     }, {
+//       question: '쌀', 
+// options: "ㅅ ㅆ",
+//       answer: 'ㅆ'
+//     },
+     {
       question: '스',
 options: "ㅅ ㅆ",
       answer: 'ㅅ'
@@ -39,6 +41,16 @@ options: "ㅅ ㅆ",
       answer: 'ㅅ'
     }, {
       question: '씨',
+options: "ㅅ ㅆ",
+      answer: 'ㅆ'
+    },
+    {
+      question: '산', // New
+options: "ㅅ ㅆ",
+      answer: 'ㅅ'
+    },
+    {
+      question: '쓸', // New
 options: "ㅅ ㅆ",
       answer: 'ㅆ'
     }

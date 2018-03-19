@@ -2,7 +2,7 @@ import React from "react";
 import FlatButton from 'material-ui/FlatButton'
 import Header from '../Header'
 import {connect} from 'react-redux'
-import PlayAudio from '../PlayAudio'
+import PlayAudio from '../../lib/PlayAudio'
 import Container from '../Container'
 import Paper from 'material-ui/Paper'
 
@@ -20,12 +20,12 @@ export class PracticePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      filename: null
+      audio: new PlayAudio()
     }
   }
   handleUpdateFilename = (item) => {
-
-    this.setState(() => ({filename: item.question}))
+    //this.setState(() => ({filename: item.question}))
+    this.state.audio.setSrc(`/assets/audio/${this.props.selection.join('')}/${item.question}.mp3`).play()
   }
   handleBackButton = () => {
     history.back()
@@ -43,9 +43,7 @@ export class PracticePage extends React.Component {
         <div style={styles.container}>
           {this.renderItems()}
         </div>
-
       </Container>
-      <PlayAudio playTimes={1} folder={this.props.selection.join('')} filename={this.state.filename + '.mp3'}/>
     </Header>)
   }
 }
@@ -56,7 +54,7 @@ const mapStateToProps = (state) => {
       return true
     }
   })
-  console.log('state.selection.syllabeSelection', state.selection.syllabeSelection);
+  //console.log('state.selection.syllabeSelection', state.selection.syllabeSelection);
   return {syllables: filteredTrain[0].syllables, selection: state.selection.syllabeSelection.split(" ")}
 }
 

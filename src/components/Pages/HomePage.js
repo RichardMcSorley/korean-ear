@@ -6,6 +6,7 @@ import Header from '../Header'
 import {history} from '../../routers/AppRouter'
 import Container from '../Container'
 import Paper from 'material-ui/Paper'
+import {Link} from 'react-router-dom';
 const styles = {
 
   button: {
@@ -13,22 +14,21 @@ const styles = {
     width: '100%'
   }
 }
-const handleGoto = (multiplier, practice, props) => {
-
-  props.update({multiplier, practice})
-  history.push('/select')
-
-}
 
 export const HomePage = (props) => (<div>
   <Header title="My Korean Ear">
     <Container>
       <Paper zDepth={3} style={styles.button}>
-        <FlatButton className="button button--homepage" onClick={() => handleGoto(0, true, props)} backgroundColor="#0094FF" label="연습 Practice" fullWidth={true}/>
+      <Link to="/practice">
+        <FlatButton className="button button--homepage" backgroundColor="#0094FF" label="연습 Practice" fullWidth={true}/>
+      </Link>
+
       </Paper>
       <Paper style={styles.button} zDepth={3}>
+        <Link to="/test">
+            <FlatButton className="button button--homepage" backgroundColor="#F00" label="Review" fullWidth={true}/>
+        </Link>
 
-        <FlatButton className="button button--homepage" onClick={() =>history.push('/test')} backgroundColor="#F00" label="Review" fullWidth={true}/>
       </Paper>
 
     </Container>

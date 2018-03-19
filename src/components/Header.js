@@ -17,23 +17,26 @@ const styles= {
         else return (<IconButton ><HomeIcon /></IconButton>)
       }
 export default (props) => (
-  <div>
-    <AppBar
-      title={props.title}
-      zDepth={3}
-      iconElementLeft={renderBackButton(props)}
-      iconElementRight={
-        <IconMenu
-            iconButtonElement={
-              <IconButton><MoreVertIcon /></IconButton>
-            }
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-          >
-            <MenuItem primaryText="Help" />
-        </IconMenu>}
-    />
-  {props.children}
+  <div className="header">
+    <div className="header-wrap">
+      <AppBar
+        title={props.title}
+        zDepth={3}
+        iconElementLeft={renderBackButton(props)}
+        iconElementRight={
+          <IconMenu
+              iconButtonElement={
+                <IconButton><MoreVertIcon /></IconButton>
+              }
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+              <MenuItem primaryText="Help" />
+          </IconMenu>}
+      />
+    {props.children}
+
+    </div>
 
   </div>
 

@@ -3,15 +3,16 @@ import FlatButton from 'material-ui/FlatButton'
 import Paper from 'material-ui/Paper'
 import Header from '../Header'
 import {connect} from 'react-redux'
-import PlayAudio from '../PlayAudio'
 import Container from '../Container'
 import TestButton from '../TestButton'
 import { skipCard, wrongAnswer, correctAnswer } from '../../actions/train';
 import moment from 'moment'
 import _ from 'underscore'
+import PlayAudio from '../../lib/PlayAudio';
 const nextSession = JSON.parse(localStorage.nextSession || null);
 const reviewed = JSON.parse(localStorage.reviewed || 0);
 const lastSessionQ = JSON.parse(localStorage.lastSessionQ || null);
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const styles={
   button: {
@@ -21,6 +22,9 @@ const styles={
   text: {
     color: 'white'
   },
+  container:{
+
+  }
 }
 export class PracticePage extends Component{
 constructor(props){
@@ -28,7 +32,8 @@ constructor(props){
   this.state = {
     nextSession: nextSession,
     reviewed: reviewed,
-    lastSessionQ: lastSessionQ || {}
+    lastSessionQ: lastSessionQ || {},
+    audio: new PlayAudio()
   }
 }
 
@@ -75,6 +80,7 @@ handleSelectAnswer = (e,userSelection)=>{
 }
 
 renderItems = ()=>{
+  this.state.audio.setSrc(`/assets/audio/${this.props.options.join('')}/${this.props.currentCard.question}.mp3`).play()
   return this.props.options.map((item)=>(
 <Paper
 style={styles.button}
@@ -98,16 +104,18 @@ key={item}
 }
 renderBoard = ()=>{
   return (
-    <div>
-      {this.renderItems()}
-      <PlayAudio
-        playTimes={this.props.multiplier}
-        folder={this.props.options.join('')}
-        filename={ this.props.currentCard && this.props.currentCard.question + '.mp3'}
-      />
-      {this.handleShouldEnd()}
-    </div>
-
+    <TransitionGroup component="test" className="page-test">
+      <CSSTransition key={this.props.currentCard.answer} timeout={{ enter: 800, exit: 800 }} classNames="test-questions">
+        <div className="test-bed">
+          {this.renderItems()}
+          <Paper
+            zDepth={3}>
+            <FlatButton className="button" label="Repeat Audio" onClick={()=>this.state.audio.setSrc(`/assets/audio/${this.props.options.join('')}/${this.props.currentCard.question}.mp3`).play()} backgroundColor='#0094FF' />
+          </Paper>
+          {this.handleShouldEnd()}
+        </div>
+    </CSSTransition>
+  </TransitionGroup>
   )
 }
 handleBackButton =()=>{
@@ -141,7 +149,7 @@ handleShouldEnd = () =>{
 renderNormally=()=>{
 
       return (
-        <div>
+        <div style={styles.container}>
           {this.props.currentCard === undefined ? (
             <div>
               <Paper
@@ -178,7 +186,7 @@ renderEnd=()=>{
           </div>
           <div>
             {Object.keys(this.state.lastSessionQ).map((key)=>(
-              <p>{key} - {this.state.lastSessionQ[key].answer} - Correct: {this.state.lastSessionQ[key].value.correct} Incorrect: {this.state.lastSessionQ[key].value.incorrect}</p>
+              <p key={key}>{key} - {this.state.lastSessionQ[key].answer} - Correct: {this.state.lastSessionQ[key].value.correct} Incorrect: {this.state.lastSessionQ[key].value.incorrect}</p>
             ))}
           </div>
         </div>
@@ -199,6 +207,7 @@ render(){
           moment(this.state.nextSession).isAfter() ? this.renderEnd() : this.renderNormally()
         }
       </Container>
+
     </Header>
   )
 
