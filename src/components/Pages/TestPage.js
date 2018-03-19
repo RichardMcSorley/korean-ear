@@ -16,7 +16,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const styles={
   button: {
-    margin: 10,
+    position: 'absolute',
 
   },
   text: {
@@ -83,9 +83,10 @@ renderItems = ()=>{
   this.state.audio.setSrc(`/assets/audio/${this.props.options.join('')}/${this.props.currentCard.question}.mp3`).play()
   return this.props.options.map((item)=>(
 <Paper
-style={styles.button}
+  style={styles.button}
+  key={item}
   zDepth={3}
-key={item}
+
   >
   <TestButton
     onClick={(e)=>this.handleSelectAnswer(e,item)}
@@ -98,8 +99,6 @@ key={item}
      />
 
 </Paper>
-
-
   ))
 }
 renderBoard = ()=>{

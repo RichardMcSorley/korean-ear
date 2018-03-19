@@ -14,24 +14,57 @@
 @import '/components/loader';
 @import '/animations/page-transitions';
 
-@-webkit-keyframes scaleDown {
-	to { opacity: 0; -webkit-transform: scale(.8); }
+// .example-enter {
+//   animation: fadeIn 0.7s ease both;
+// }
+//
+// .example-enter.example-enter-active {
+// animation: fadeIn 0.7s ease both;
+// }
+//
+// .example-leave {
+// animation: fadeIn 0.7s ease both;
+// //animation: moveToRightFade 0.7s ease both;
+// //position:absolute;
+// }
+//
+// .example-leave.example-leave-active {
+// animation: fadeIn 0.7s ease both;
+// }
+// .example-appear {
+//   animation: fadeIn 0.7s ease both;
+// //animation: moveFromLeftFade 0.7s ease both;
+// }
+//
+// .example-appear.example-appear-active {
+// animation: fadeIn 0.7s ease both;
+// }
+.example-enter {
+    opacity: 0;
+    transform:   translate(-250px,0);
+    transform: translate3d(-250px,0,0);
 }
-@-moz-keyframes scaleDown {
-	to { opacity: 0; -moz-transform: scale(.8); }
+.example-enter.example-enter-active {
+	opacity: 1;
+	transition: opacity 1s ease;
+	transform:   translate(0,0);
+	transform: translate3d(0,0,0);
+	transition-property: transform, opacity;
+	transition-duration: 300ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
 }
-@keyframes scaleDown {
-	to { opacity: 0; transform: scale(.8); }
+.example-leave {
+	opacity: 1;
+	transform:   translate(0,0,0);
+	transform: translate3d(0,0,0);
+  transition-property: transform, opacity;
+	transition-duration: 300ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
 }
-
-@-webkit-keyframes scaleUp {
-	from { opacity: 0; -webkit-transform: scale(.8); }
-}
-@-moz-keyframes scaleUp {
-	from { opacity: 0; -moz-transform: scale(.8); }
-}
-@keyframes scaleUp {
-	from { opacity: 0; transform: scale(.8); }
+.example-leave.example-leave-active {
+	opacity: 0;
+	transform:   translate(250px,0);
+	transform: translate3d(250px,0,0);
 }
 
 
@@ -45,6 +78,10 @@
   transition: all .8s both ease;
 	animation: rotateRoomLeftIn .8s both ease;
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
 
 
 .fade-exit {
